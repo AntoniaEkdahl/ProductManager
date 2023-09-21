@@ -14,6 +14,8 @@ class Program
     while (true)
     {
       WriteLine("1. Ny produkt");
+      WriteLine("2. Sök produkt");
+
 
       var keyPressed = ReadKey(true);
 
@@ -27,11 +29,60 @@ class Program
           AddProductView();
 
           break;
+
+        case ConsoleKey.D2:
+        case ConsoleKey.NumPad2:
+
+          SearchProductView();
+
+          break;
       }
 
       Clear();
     }
   }
+
+  private static void SearchProductView()
+  {
+    string sku = GetUserInput("SKU");
+
+    Clear();
+
+    var product = GetProductBySKU(sku);
+
+    if (product is not null)
+    {
+      WriteLine($"Namn: {product.Name}");
+
+      WriteLine($"SKU: {product.Sku}");
+
+      WriteLine($"Beskrivning: {product.Description}");
+
+      WriteLine($"Bild (URL): {product.Image}");
+
+      WriteLine($"Pris: {product.Price}");
+
+      WaitUntil(ConsoleKey.Escape);
+    }
+    else
+    {
+      WriteLine("Produkt finns ej");
+
+      Thread.Sleep(2000);
+    }
+
+  }
+
+
+  private static Product? GetProductBySKU(string sku)
+  {
+    using var context = new ApplicationDbContext();
+
+    var product = context.Product.FirstOrDefault(x => x.Sku == sku);
+
+    return product;
+  }
+
   private static void AddProductView()
   {
     var name = GetUserInput("Namn");
@@ -90,9 +141,15 @@ class Program
   }
 
   private static string GetUserInput(string label)
+
   {
     Write($"{label}: ");
 
     return ReadLine() ?? "";
+  }
+
+  private static void WaitUntil(ConsoleKey key)
+  {
+    while (ReadKey(true).Key != key) ;
   }
 }

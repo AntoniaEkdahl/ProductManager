@@ -15,6 +15,7 @@ class Program
     {
       WriteLine("1. Ny produkt");
       WriteLine("2. Sök produkt");
+      WriteLine("3. Avsluta");
 
 
       var keyPressed = ReadKey(true);
@@ -36,6 +37,13 @@ class Program
           SearchProductView();
 
           break;
+
+        case ConsoleKey.D3:
+        case ConsoleKey.NumPad3:
+
+          Environment.Exit(0);
+
+          return;
       }
 
       Clear();

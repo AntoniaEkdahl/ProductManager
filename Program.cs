@@ -53,16 +53,32 @@ class Program
     if (product is not null)
     {
       WriteLine($"Namn: {product.Name}");
-
       WriteLine($"SKU: {product.Sku}");
-
       WriteLine($"Beskrivning: {product.Description}");
-
       WriteLine($"Bild (URL): {product.Image}");
-
       WriteLine($"Pris: {product.Price}");
+      WriteLine();
+      WriteLine("(R)adera");
 
-      WaitUntil(ConsoleKey.Escape);
+      while (true)
+      {
+        var keyPressed = ReadKey(true);
+
+        Clear();
+
+        switch (keyPressed.Key)
+        {
+          case ConsoleKey.Escape:
+
+            return;
+
+          case ConsoleKey.R:
+
+            DeleteProduct(product);
+
+            return;
+        }
+      }
     }
     else
     {
@@ -70,9 +86,66 @@ class Program
 
       Thread.Sleep(2000);
     }
-
   }
 
+  private static void DeleteProduct(Product product)
+  {
+    using var context = new ApplicationDbContext();
+
+    WriteLine($"Namn: {product.Name}");
+    WriteLine($"SKU: {product.Sku}");
+    WriteLine($"Beskrivning: {product.Description}");
+    WriteLine($"Bild (URL): {product.Image}");
+    WriteLine($"Pris: {product.Price}");
+    WriteLine();
+    WriteLine("Radera produkt? (J)a (N)ej");
+
+    while (true)
+    {
+      var keyPressed = ReadKey(true);
+
+      Clear();
+
+      switch (keyPressed.Key)
+      {
+        case ConsoleKey.J:
+
+          context.Product.Remove(product);
+
+          context.SaveChanges();
+
+          WriteLine("Produkt raderad");
+
+          Thread.Sleep(2000);
+
+          return;
+
+        case ConsoleKey.N:
+
+          WriteLine($"Namn: {product.Name}");
+          WriteLine($"SKU: {product.Sku}");
+          WriteLine($"Beskrivning: {product.Description}");
+          WriteLine($"Bild (URL): {product.Image}");
+          WriteLine($"Pris: {product.Price}");
+          WriteLine();
+          WriteLine("(R)adera");
+
+          break;
+      }
+      switch (keyPressed.Key)
+      {
+        case ConsoleKey.R:
+
+          DeleteProduct(product);
+
+          return;
+
+        case ConsoleKey.Escape:
+
+          return;
+      }
+    }
+  }
 
   private static Product? GetProductBySKU(string sku)
   {
@@ -114,9 +187,16 @@ class Program
       {
         case ConsoleKey.J:
 
-          SaveProduct(product);
+          try
+          {
+            SaveProduct(product);
 
-          WriteLine("Produkt sparad");
+            WriteLine("Produkt sparad");
+          }
+          catch
+          {
+            WriteLine("Produkt med samma SKU finns redan registrerat");
+          }
 
           Thread.Sleep(2000);
 
@@ -146,10 +226,5 @@ class Program
     Write($"{label}: ");
 
     return ReadLine() ?? "";
-  }
-
-  private static void WaitUntil(ConsoleKey key)
-  {
-    while (ReadKey(true).Key != key) ;
   }
 }

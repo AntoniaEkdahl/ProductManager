@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/antoniaekdahl/Workspace/BACKEND1/inlämning/Projektarbete/Projektarbete.csproj": {}
+    "/Users/antoniaekdahl/Workspace/BACKEND1/inlämning/Projektarbete/Projektarbete.csproj": {}
   },
   "projects": {
-    "/Users/antoniaekdahl/Workspace/BACKEND1/inlämning/Projektarbete/Projektarbete.csproj": {
+    "/Users/antoniaekdahl/Workspace/BACKEND1/inlämning/Projektarbete/Projektarbete.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/antoniaekdahl/Workspace/BACKEND1/inlämning/Projektarbete/Projektarbete.csproj",
+        "projectUniqueName": "/Users/antoniaekdahl/Workspace/BACKEND1/inlämning/Projektarbete/Projektarbete.csproj",
         "projectName": "Projektarbete",
-        "projectPath": "/Users/antoniaekdahl/Workspace/BACKEND1/inlämning/Projektarbete/Projektarbete.csproj",
+        "projectPath": "/Users/antoniaekdahl/Workspace/BACKEND1/inlämning/Projektarbete/Projektarbete.csproj",
         "packagesPath": "/Users/antoniaekdahl/.nuget/packages/",
-        "outputPath": "/Users/antoniaekdahl/Workspace/BACKEND1/inlämning/Projektarbete/obj/",
+        "outputPath": "/Users/antoniaekdahl/Workspace/BACKEND1/inlämning/Projektarbete/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/antoniaekdahl/.nuget/NuGet/NuGet.Config"

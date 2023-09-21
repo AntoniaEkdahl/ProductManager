@@ -37,7 +37,6 @@ class Program
           SearchProductView();
 
           break;
-
         case ConsoleKey.D3:
         case ConsoleKey.NumPad3:
 
@@ -60,12 +59,8 @@ class Program
 
     if (product is not null)
     {
-      WriteLine($"Namn: {product.Name}");
-      WriteLine($"SKU: {product.Sku}");
-      WriteLine($"Beskrivning: {product.Description}");
-      WriteLine($"Bild (URL): {product.Image}");
-      WriteLine($"Pris: {product.Price}");
-      WriteLine();
+      DisplayProductDetails(product);
+
       WriteLine("(R)adera");
 
       while (true)
@@ -96,16 +91,22 @@ class Program
     }
   }
 
-  private static void DeleteProduct(Product product)
+  private static void DisplayProductDetails(Product product)
   {
-    using var context = new ApplicationDbContext();
-
     WriteLine($"Namn: {product.Name}");
     WriteLine($"SKU: {product.Sku}");
     WriteLine($"Beskrivning: {product.Description}");
     WriteLine($"Bild (URL): {product.Image}");
     WriteLine($"Pris: {product.Price}");
     WriteLine();
+  }
+
+  private static void DeleteProduct(Product product)
+  {
+    using var context = new ApplicationDbContext();
+
+    DisplayProductDetails(product);
+
     WriteLine("Radera produkt? (J)a (N)ej");
 
     while (true)
@@ -130,12 +131,8 @@ class Program
 
         case ConsoleKey.N:
 
-          WriteLine($"Namn: {product.Name}");
-          WriteLine($"SKU: {product.Sku}");
-          WriteLine($"Beskrivning: {product.Description}");
-          WriteLine($"Bild (URL): {product.Image}");
-          WriteLine($"Pris: {product.Price}");
-          WriteLine();
+          DisplayProductDetails(product);
+
           WriteLine("(R)adera");
 
           break;
